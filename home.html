@@ -1,0 +1,543 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vimtitrade</title>
+<style type="text/css">
+  @import url('lato.css');
+html,body{
+	padding:0px;
+	margin:0px;
+	color:gray;
+	display:relative;
+	overflow-x:hidden;
+	background:rgba(212,225,245,0.1);
+/*	background:rgba(5,5,15,0.85);
+/*	background:black;*/
+}
+*{
+	font-family:"Lato", sans-serif;
+	color:gray;
+	padding:0;
+	margin:0;
+}
+img {
+	z-index: -9999 !important;
+}
+a{
+	text-decoration:none;
+	color:red;
+	margin:0;
+	padding:0;
+}
+#app{
+	height:100vh;
+	width:100vw;
+	margin:auto;
+	display:flex;
+	align-items:center;
+	flex-direction:column;
+}
+#home{
+	width:100%;
+	max-width:600px;
+	height:auto;
+	margin-top:45px;
+}
+#home .p-details, .balance, .cash, .rate, .transaction, .msg{
+	margin:4px 10px;
+	width:auto;
+	max-width:600px;
+	background:rgba(252,252,252,1.0);
+	border-radius:3px;
+	box-shadow:0px 0px 25px rgba(25,25,45,0.15);
+	padding:10px;
+}
+
+#home .p-details{
+	height:auto;
+	font-weight:bold;
+	font-size:12px;
+	color:rgba(252,252,252,0.95);
+	background:rgba(140,15,43,1.0);
+}
+.p-details.top{
+	height:auto !important;
+	box-shadow:inset 0px 0px 40px rgba(12,52,12,0.5) !important;
+}
+.p-details img:first-child {
+	height:15px;
+	width:15px;
+	float:left;
+	opacity:1;
+	margin:0px 3px;
+}
+
+.p-details span img{
+	height:17px !important;
+	width:17px !important;
+	opacity:0.7 !important;
+	display:block;
+	float:right !important;
+}
+
+#nav{
+	height:40px;
+	position:fixed;
+	width:100%;
+	background:rgba(250,250,250,1.0);
+	padding: 0;
+	z-index:9999;
+	text-align:center;
+	box-shadow:0px 1px 25px rgba(25,25,25,0.2);
+}
+#nav img{
+	height:20px;
+	width:20px;
+	margin:10px 8px;
+	position:relative;
+}
+#nav a:not(:first-child){
+	float:right;
+	display:block;
+}
+#nav a:nth-child(2){
+	float:left;
+	margin:15px 10px;
+	position:relative;
+	display:block;
+	font-size:17px;
+	text-decoration:none;
+	font-weight:bold;
+	font-variant:small-caps;
+	letter-spacing:1.5px;
+	color:rgba(162,10,84,1.0);
+}
+#nav a:first-child {
+	float:left;
+	text-align:center;
+}
+#nav .logo {
+	height:35px;
+	width:70px;
+	margin:2px -14px;
+}
+#btnav{
+	background:rgba(250,250,250,1.0);
+	position:fixed;
+	bottom:0;
+	border-radius:20px 20px 0 0;
+	padding-bottom:0px;
+	width:100%;
+	text-align:center;
+	box-shadow:0px 1px 25px rgba(25,25,25,0.2);
+}
+#btnav img{
+	height:28px;
+	width:28px;
+	position:relative;
+	padding:0;
+	margin:0;
+}
+#btnav div{
+	margin:0px auto;
+	background-color:;
+	width:100%;
+	min-width:260px;
+	height:auto;
+	justify-content:center;
+	display:flex;
+}
+#btnav a{
+	display:block;
+	margin:8px 4.5%;
+	text-align:center;
+	font-size:11px;
+	max-width:50px;
+	font-weight:bold;
+	text-decoration:none;
+	color:rgba(70,0,20,0.6);
+}
+.b-margin{
+	width:100%;
+	height:70px;
+}
+.wallet {
+	background:rgba(245,225,235 0.9);
+	padding:15px 10px;
+	font-weight:bold;
+}
+.wallet .wb{
+	font-size:12px;
+	color:rgba(15,20,15,0.8);
+	letter-spacing:1px;
+	padding-bottom:5px;
+}
+.wallet .wmb{
+	font-size:20px;
+	color:rgba(32,50,0,1.0);
+	letter-spacing:2px;
+}
+.wallet .wmb span{
+	font-size:25px;
+	color:rgba(32,40,1,1.0);
+	letter-spacing:2px;
+	font-weight:900;
+}
+.wallet .withdraw{
+	font-size:13px;
+	color:rgba(255,252,252,1.0);
+	letter-spacing:1.5px;
+	float:right;
+	font-weight:700;
+	background:rgba(15,80,25,1.0);
+	padding:5px 10px;
+	border-radius:5px;
+	margin:10px;
+	margin-top:-24px;
+	box-shadow:inset 0px 0px 35px rgba(182,222,10,0.5);
+}
+.wallet .line{
+	font-size:12px;
+	background:rgba(45,35,35,1.0);
+	padding:2px 20px;
+	width:30vw;
+	border-radius:5px;
+	margin-top:10px;
+	box-shadow:inset 0px 0px 35px rgba(182,252,10,0.4);
+}
+hr {
+	margin:0px 10px;
+	height:1px;
+	background:red;
+	opacity:0.2;
+}
+hr.af {
+	margin-top:-15px !important;
+}
+/*
+	position:absolute;
+	height:100%;
+	background-color:rgba(140,15,43,0.2);
+	padding:0px;
+	border-radius:8px;
+	width:100%;
+	background:url("vimtitradeback.png");
+	background-repeat:none;
+	background-position:center;
+	background-size:cover;
+	filter:blur(28px);
+	top:0px;
+	opacity:0.5;
+	z-index:-1;
+}*/
+.topshop {
+	position:relative;
+	font-size:13px;
+	color:rgba(255,210,210,1.0);
+	letter-spacing:1.5px;
+	font-weight:700;
+	height:auto;
+	background-color:rgba(140,15,43,0.1);
+	padding:1px;
+	border-radius:8px;
+	width:auto;
+	margin:12px;
+}
+.tophead img{
+	float:left;
+	height:23px;
+	width:23px;
+	margin-right: 5px;
+	margin-top:-4px;
+	opacity:1.0;
+}
+.tophead {
+	margin:0px;
+	padding:12px 10px;
+	font-size:13px;
+	color:rgba(140,15,43,0.7);
+	border-bottom:1px solid rgba(140,15,43,0.2);
+}
+.tophead .view{
+	float:right;
+	margin-right: 5px;
+	color:rgba(140,15,43,0.7);
+}
+.shops {
+	position:relative;
+	background:rgba(255,255,255,0.6);
+	width:auto;
+	height:auto;
+	margin:10px 4px;
+	border-radius:3px;
+	box-shadow:inset 0px 0px 25px rgba(255,255,255,0.2);
+}
+.shops div {
+	color:rgba(140,15,43,1.0);
+	margin:0px;
+}
+.shops .mg{
+	font-size:12px;
+	margin:0px 0px;
+	color:rgba(140,15,43,0.7);
+	text-align:center;
+}
+.shops .sec .mg{
+	margin-top:10px;
+}
+.shops .thir .mg{
+	padding:5px;
+	text-align:left;
+	color:rgba(140,15,43,1.0);
+}
+.shops .thir .mg strong {
+	color:rgba(140,15,43,1.0);
+	font-weight:900;
+}
+.shops .thir .mg .mana {
+	float:right;
+}
+.shops .mgname{
+	font-size:16px;
+	text-align:center;
+	padding:0px 10px;
+	color:rgba(140,15,43,1.0);
+}
+.shops .mgname2{
+	font-size:12px;
+	padding:5px 10px;
+	color:rgba(140,15,43,0.8);
+}
+.shops .mgname1{
+	font-size:22px;
+	margin:auto 10px;
+	color:rgba(140,15,43,1.0);
+}
+.shops .flot{
+	font-size:10px;
+	margin:0 2px;
+	padding:0;
+	float:right;
+	color:rgba(140,15,43,1.0);
+}
+.shops .thir{
+	font-size:18px;
+	margin:auto 2px;
+	color:rgba(140,15,43,1.0);
+}
+.shops .sec {
+	margin-top:0px;
+}
+.shops .img {
+	position:absolute;
+	border-radius:4px;
+	top:26px;
+	left:12px;
+}
+.shops .img img{
+	width:40px;
+	height:40px;
+	border-radius:4px;
+}
+.market{
+	position:relative;
+	display:flex;
+	font-size:13px;
+	color:rgba(255,210,210,1.0);
+	letter-spacing:1.5px;
+	font-weight:700;
+	height:100px;
+	background-color:rgba(30,45,23,0.1);
+	padding:1px;
+	border-radius:8px;
+	width:auto;
+	margin:12px;
+	overflow-x:scroll;
+}
+.mymarket {
+	font-size:14px;
+	margin:0 6%;
+	font-weight:900;
+	color:rgba(10,130,10,1.0);
+	letter-spacing:2px;
+}
+.topshop .default {
+	font-size:30px;
+	text-align:center;
+	padding:20px;
+}
+.topshop .default-text {
+	font-size:10px;
+	text-align:center;
+	padding:20px;
+}
+.markhold {
+	position:relative;
+	width:80px;
+	height:auto;
+	background:linear-gradient(to bottom, rgba(172,10,4,1.0) 50%, rgba(51,12,11,1.0));
+	border-radius:8px;
+	margin:8px 10px;
+	box-shadow:2px 2px 5px rgba(0,0,0,0.4);
+}
+.markhold .overline{
+	position:absolute;
+	width:80px;
+	height:84px;
+	background:smokewhite;
+	border-radius:8px;
+	top:0px;
+	left:0px;
+	z-index:8;
+	opacity:0.2;
+}
+.markhold .overline.inactive{
+	background:rgba(250,250,250,1.0);
+	opacity:0.5;
+}
+.proname {
+	color:rgba(254,254,255,1.0);
+	text-align:center;
+	position:absolute;
+	width:78px;
+	font-size:14px;
+	top:18px;
+	left:-3px;
+	padding:4px;
+	letter-spacing:2px;
+	background:rgba(140,10,20,0.5);
+	z-index:8;
+}
+.prostatus {
+	color:rgba(254,254,255,1.0);
+	text-align:center;
+	position:absolute;
+	bottom:0;
+	left:0;
+	font-size:10px;
+	font-variant:small-caps;
+	font-style:italic;
+	padding:4px;
+	z-index:8;
+}
+.markhold img {
+	display:relative;
+	width:100px;
+	margin:-10px;
+	filter:blur(0px);
+}
+.markhold:nth-child(4) {
+	background:linear-gradient(to bottom, rgba(12,150,4,1.0) 50%, rgba(1,52,11,1.0));
+}
+.markhold:nth-child(4) .proname {
+	background:rgba(50,200,85,0.5);
+}
+.markhold:nth-child(3){
+	background:linear-gradient(to bottom, rgba(182,200,4,1.0) 50%, rgba(61,62,11,1.0));
+}
+.markhold:nth-child(3) .proname {
+	background:rgba(220,200,85,0.5);
+}
+.markhold:nth-child(2){
+	background:linear-gradient(to bottom, rgba(12,20,214,1.0) 50%, rgba(1,5,61,1.0));
+}
+.markhold:nth-child(2) .proname {
+	background:rgba(22,20,185,0.5);
+}
+.markhold:nth-child(5){
+	background:linear-gradient(to bottom, rgba(162,10,84,1.0) 50%, rgba(1,52,11,1.0));
+}
+.markhold:nth-child(6){
+	background:linear-gradient(to bottom, rgba(162,10,84,1.0) 50%, rgba(1,52,11,1.0));
+}
+.chart {
+	background:white;
+	width:92%;
+	margin:15px;
+	height:300px;
+	border-radius:10px;
+}
+.chartdiv {
+	padding:10px;
+	color:black;
+	letter-spacing:1.5px;
+	font-weight:900;
+	opacity:.9;
+	background:rgba(240,240,250,.2);
+	border-radius:10px;
+}
+.chartdiv div{
+	float:right;
+	font-size:15px;
+}
+</style>
+</head>
+<body>
+<div id="app">
+<nav id="nav" >
+<a href="" ><img src="svglogo1.png" class="logo" ></a>
+<a href="" >Stats</a>
+<a href="" ><img src="100(84).png" ></a>
+<a href="" ><img src="100(3).png" ></a>
+<a href="" ><img src="100(4).png" ></a>
+</nav>
+<section id="home" >
+<div class="p-details top" ><img src="100(19).png" >Joweb Market
+<span><img src="100(81).png" ></span></div><hr>
+<div class="wallet" >
+	<div class="wb" >Wallet Balance</div>
+	<div class="wmb" >N<span>35</span>.00</div>
+	<div class="line" ></div>
+	<div class="withdraw">Cash out</div>
+</div><br><hr class="af" >
+
+<div class="topshop" >
+<div class="topshopback" ></div>
+<div class="tophead" >Top Shop<img src="100(82).png" ><div class="view" >view</div></div>
+<!--<div class="shops" >
+<div class="img" ><img src="vimtikey.jpg" ></div>
+	<div class="mgname2" >Vimtikey Shop<div class="flot" >•••</div></div>
+<center class="firs" >
+	<div class="mg" >Profits</div>
+	<div class="mgname1" >N510.00</div>
+</center>
+<div class="sec" >
+	<div class="mg" >Product sold</div>
+	<div class="mgname" >50</div>
+</div>
+<div class="thir" >
+	<div class="mg" >Marketers :<strong> 30</strong><div class="mana" >Manager: <strong>John Dove</strong></div></div>
+</div>
+</div>-->
+<div class="default" >No Shops Yet</div>
+<div class="default-text" >Employ a Manager to Open a Shop</div>
+</div>
+<div class="mymarket" >Market</div>
+<div class="market" >
+<div class="markhold" ><img src="diamond.gif" ><div class="overline" ></div><div class="proname" >Vimtikey</div><div class="prostatus" >Active</div></div>
+<div class="markhold" ><img src="diamond.gif" ><div class="overline" ></div><div class="proname" >Vimticool</div><div class="prostatus" >Active</div></div>
+<div class="markhold" ><img src="diamondinactive.png" ><div class="overline inactive" ></div><div class="proname" >Vimtizera</div><div class="prostatus" >Inactive</div></div>
+<div class="markhold" ><img src="diamondinactive.png" ><div class="overline inactive" ></div><div class="proname" >Vimtilena</div><div class="prostatus" >Inactive</div></div>
+<!--<div class="markhold" ><img src="diamond.gif" ><div class="overline" ></div><div class="proname" >Vimtirear</div><div class="prostatus" >Active</div></div>
+<div class="markhold" ><img src="diamond.gif" ><div class="overline" ></div><div class="proname" >Vimtidime</div><div class="prostatus" >Active</div></div>-->
+</div>
+<div class="chart" >
+<div class="chartdiv" >Charts<div>•••</div></div>
+</div>
+<div class="b-margin" ></div>
+</section>
+<nav id="btnav" >
+<div>
+<a href="" ><img src="100(6).png" >Home</a>
+<a href="" ><img src="100(83).png" >Stats</a>
+<a href="" ><img src="100(9).png" >Product</a>
+<a href="" ><img src="100(8).png" >Market</a>
+<a href="" ><img src="100(7).png" >Store</a>
+</div>
+</nav>
+</div>
+</body>
+</html>

@@ -1,0 +1,371 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html >
+<head>
+	<meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vimtitrade</title>
+<style type="text/css">
+	@import url('./lato.css');
+html,body{
+	padding:0px;
+	margin:0px;
+	color:gray;
+	display:relative;
+	overflow-x:hidden;
+	background:rgba(5,5,15,0.85);
+/*	background:black;*/
+}
+*{
+	text-decoration:none;
+	color:rgba(225,225,225,0.85);
+	margin:0;
+	padding:0;
+	font-family:"Lato", sans-serif;
+}
+#app{
+	height:100vh;
+	width:100vw;
+	margin:auto;
+	display:flex;
+	align-items:center;
+	flex-direction:column;
+}
+
+#nav-r{
+	display:block;
+	width:100%;
+	padding:0;
+	margin:0;
+	background:rgba(30,30,40,1.0);
+	box-shadow:0px 1px 5px rgba(125,125,125,0.2);
+}
+#nav-r a:not(:first-child){
+	display:block;
+	font-size:20px;
+	margin:10px 60px;
+	font-weight:bolder;
+	color:rgba(165,5,65,1.0);
+	letter-spacing:1.5px;
+}
+#nav-r a img{
+	width:30px;
+	margin:5px 15px;
+	float:left;
+}
+#lockbank {
+	width:auto;
+	height:auto;
+	padding:0;
+	margin:0px auto;
+}
+#lockbank .lock-d{
+	height:auto;
+	margin:20px 5px;
+	width:auto;
+	max-width:600px;
+	background:rgba(8,8,15,1.0);
+	border-radius:10px;
+	box-shadow:0px 0px 60px rgba(150,150,150,0.15);
+	padding:10px;
+}
+.lock-d .lock-l{
+	margin:5px;
+	letter-spacing:1px;
+	color:rgba(192,10,72,0.9);
+	text-shadow:0px 0px 25px rgba(25,25,25,0.25);
+}
+.lock-d .lock-in{
+	margin:25px 5px;
+	letter-spacing:1px;
+	font-size:30px;
+	color:rgba(152,12,22,0.9);
+	border-bottom:1px solid rgba(10,130,25,1.0);
+}
+.lock-d .lock-in input{
+	margin:2px;
+	font-size:30px;
+	color:rgba(122,122,122,1.0);
+	font-weight:bolder;
+	background:transparent;
+	width:80%;
+	padding:0;
+	outline:none;
+	border:none;
+	cursor:text;
+}
+.lock-d .l-date{
+	margin:15px;
+	margin-top:25px;
+	font-size:15px;
+	color:rgba(225,225,225,0.85);
+	width:auto;
+	padding:0;
+	border-bottom:1px solid rgba(10,130,25,1.0);
+}
+.lock-d .l-date img{
+	width:25px;
+	float:right;
+	margin:5px -1px;
+	opacity:0.7;
+}
+.lock-d .l-date .label{
+	font-size:15px;
+	color:rgba(225,225,225,0.85);
+	width:100%;
+	padding:0;
+}
+.lock-d .l-date .lock-date{
+	margin:2px;
+	font-size:18px;
+	color:rgba(225,225,225,0.85);
+	background:transparent;
+	width:85%;
+	padding:5px;
+	outline:none;
+	border:none;
+	cursor:text;
+}
+.lock-d .lock-in label{
+	letter-spacing:1px;
+	font-size:30px;
+	color:rgba(225,225,225,0.5);
+	font-weight:bolder;
+}
+.lock-d .lock-in img{
+	width:25px;
+	float:right;
+	margin:2px;
+	opacity:0.7;
+}
+.lock-d .lock-limit{
+	width:100%;
+	display:flex;
+	margin-top:-15px;
+	margin-bottom:30px;
+}
+.lock-d .lock-limit div{
+	width:auto;
+	margin:0px 15px;
+	border-radius:10px;
+	border:1px solid rgba(225,225,225,0.4);
+	padding:5px 10px;
+	font-size:14px;
+	color:rgba(225,225,225,0.4);
+}
+.info {
+	margin:0px 20px;
+	font-size:14px;
+}
+.info div{
+	margin:5px;
+	color:rgba(225,225,225,0.4);
+	font-weight:bold;
+}
+.info div strong {
+	color:rgba(222,22,22,1.0);
+}
+.info div:last-child {
+	margin:5px;
+	color:rgba(12,120,32,0.9);
+	font-weight:bold;
+}
+.wb, .cb{
+	margin:15px 1% 5px 15px;
+	color:rgba(225,225,225,0.4);
+	font-size:12px;
+	padding:0px 10px;
+	text-shadow:0px 0px 15px rgba(25,25,25,0.3);
+
+}
+.wb strong , .cb strong {
+	float:right;
+	color:rgba(51,10,182,0.9);
+	font-size:12px;
+	padding:0px 10px;
+	text-shadow:0px 0px 15px rgba(125,125,125,0.3);
+}
+.lock-f {
+	float:right;
+	display:block;
+	margin: 0px;
+	outline:none;
+	border:none;
+	color:rgba(252,250,252,1.0);
+	padding:3px 10px;
+	border-radius:5px;
+	letter-spacing:1px;
+	font-weight:bold;
+	background:rgba(12,100,32,0.9);
+	text-shadow:0px 0px 15px rgba(125,125,125,0.3);
+}
+.lock-btn {
+	background:rgba(12,100,32,0.9);
+	margin:10px auto;
+	border-radius:25px;
+	max-width:400px;
+	align-items:center;
+	justify-content:center;
+	display:flex;
+}
+.lock-btn img {
+	width:35px;
+}
+.lock-btn div {
+	color:rgba(250,250,250,1.0);
+	font-size:22px;
+	font-weight:bold;
+}
+#confirm{
+	display:none;
+}
+.confirm-lock{
+	position:absolute;
+	width:100%;
+	height:100%;
+	margin:0;
+	padding:0;
+	top:0px;
+	background:rgba(52,52,52,0.3);
+}
+.confirm{
+	position:fixed;
+	min-height:400px;
+	bottom:0;
+	width:100%;
+	background:rgba(30,30,40,1.0);
+	border-top-left-radius:25px;
+	border-top-right-radius:25px;
+	z-index:999;
+}
+.confirm .cl {
+	width:auto;
+	text-align:center;
+	margin:20px 10px;
+	font-size:25px;
+	font-weight:bolder;
+	letter-spacing:2px;
+	color:rgba(15,125,45,1.0);
+}
+.confirm .cl img {
+	position:absolute;
+	width:25px;
+	top:20px;
+	right:20px;
+	opacity:0.8;
+}
+.confirm .ca {
+	width:auto;
+	text-align:center;
+	margin:5px 10px;
+	font-size:13px;
+	letter-spacing:0.5px;
+}
+.cl.al{
+	margin:0px;
+	font-size:40px;
+	letter-spacing:0.5px;
+	color:rgba(15,135,45,0.8);
+}
+.cl.al span{
+	font-size:30px;
+	color:rgba(165,5,65,0.8);
+}
+.ca.cd{
+	margin-top:40px;
+	font-size:15px;
+	letter-spacing:0.5px;
+}
+.ca.al{
+	margin:0px;
+	font-size:30px;
+	letter-spacing:0.5px;
+	color:rgba(165,5,65,0.8);
+}
+#confirm .lock-btn {
+	background:rgba(12,100,32,0.9);
+	margin:0px auto;
+	margin-top:30px;
+	border-radius:25px;
+	width:80%;
+	padding:4px;
+	max-width:400px;
+	align-items:center;
+	justify-content:center;
+	display:flex;
+}
+#confirm .lock-btn img {
+	width:35px;
+}
+#confirm .lock-btn div {
+	color:rgba(250,250,250,1.0);
+	font-size:22px;
+	font-weight:bold;
+}
+#confirm .cb, #confirm .cb strong {
+	color:rgba(220,220,220,0.5);
+}
+#confirm .wb, #confirm .wb strong {
+	color:rgba(20,100,20,1.0);
+}
+</style>
+</head>
+<body>
+<div id="app">
+<nav id="nav-r" >
+<a href="" ><img src="100(22).png" class="back" ></a>
+<a href="" >Lock cash</a>
+</nav>
+<section id="lockbank" >
+<div class="lock-d" >
+<div class="lock-l"> Lock Amount</div>
+<div class="lock-in" >
+	<label>N</label>
+	<input type="number"  placeholder="" autofocus="autofocus" >
+	<img src="100(38).png" class="logo" >
+</div>
+<div class="lock-limit" >
+	<div class="min" >Min N500</div>
+	<div class="max" >Max N10,000</div>
+</div>
+<div class="wbt" ><strong>Lock from</strong>
+<select type="radio" class="lock-f"   >
+<option>Wallet balance</option>
+<option>Cash balance</option>
+</select>
+</div>
+<div class="wb" >Wallet balance<strong> N 4,000.00 </strong></div>
+<div class="cb" >Cash balance<strong> N 8,000.00 </strong></div>
+<div class="lock-l l-date" >
+	<div class="label" >Set opening date</div>
+	<input type="date" class="lock-date"  placeholder="" >
+	<img src="100(20).png" class="date-l" >
+</div>
+<div class="info" >
+	<div><strong>Note:</strong> Cash will be returned to your wallet on the set date</div>
+	<div>No Interest No Charges</div>
+</div>
+<div class="lock-btn" >
+<div>Lock</div> 
+<img src="100(18).png">
+</div>
+</div>
+</section>
+</div>
+<div class="confirm-lock" id="confirm"  >
+<div class="confirm"  >
+	<div class="cl" >Lock <img src="100(38).png" class="logo" ></div>
+	<div class="ca" >Amount</div>
+	<div class="cl al" ><span>N</span>5000<span>.00</span></div>
+	<div class="ca cd" >Opening Date</div>
+	<div class="ca al" >07/28/2023</div>
+	<div class="wb" >Wallet balance<strong> N 4,000.00 </strong></div>
+	<div class="cb" >Cash balance<strong> N 8,000.00 </strong></div>
+	<div class="lock-btn" >
+	<div>Confirm Lock</div> 
+	<img src="100(18).png">
+	</div>
+</div>
+</div>
+</body>
+</html>
