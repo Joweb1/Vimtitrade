@@ -1,0 +1,555 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vimtitrade</title>
+<style type="text/css">
+  @import url('lato.css');
+html,body{
+	padding:0px;
+	margin:0px;
+	color:gray;
+	display:relative;
+	overflow-x:hidden;
+	/*background:whitesmoke;*/
+	background:rgba(212,225,245,0.1);
+/*	background:black;*/
+}
+*{
+	font-family:"Lato", sans-serif;
+}
+a{
+	text-decoration:none;
+	color:red;
+	margin:0;
+	padding:0;
+}
+#app{
+	height:100vh;
+	width:100vw;
+	margin:auto;
+	display:flex;
+	align-items:center;
+	flex-direction:column;
+}
+#home{
+	width:100%;
+	max-width:600px;
+	height:auto;
+	margin-top:55px;
+}
+#home .p-details, .balance, .cash, .rate, .transaction, .msg{
+	margin:15px;
+	width:auto;
+	max-width:600px;
+	background:rgba(252,252,252,1.0);
+	border-radius:10px;
+	box-shadow:0px 0px 25px rgba(25,25,45,0.15);
+	padding:10px;
+}
+#home .balance{
+	border-radius:20px;
+	font-weight:bold;
+	color:rgba(20,20,20,1.0);
+	padding:10px;
+}
+#home .cash{
+	margin:-6px 15px;
+}
+.balance span:not(:first-child){
+	display:block;
+	float:right;
+}
+.balance span:nth-child(3){
+	float:left;
+}
+.balance img{
+	width:20px;
+	height:20px;
+	margin:0px 4px;
+}
+.balance span:nth-child(2){
+	font-weight:bold;
+	text-align:center;
+	background:rgba(170,12,60,1.0);
+	padding:6px;
+	margin:-8px -1px;
+	text-align:center;
+	border-radius:2px 20px 2px 20px;
+	color:white;
+	box-shadow:0px 1px 5px rgba(25,25,25,0.5);
+}
+.cash span:nth-child(2){
+	font-weight:bold;
+	text-align:center;
+	background:rgba(170,12,60,1.0);
+	padding:6px;
+	margin:-8px -1px;
+	text-align:center;
+	border-radius:2px 20px 2px 20px;
+	color:white;
+	box-shadow:0px 1px 5px rgba(25,25,25,0.5);
+}
+#home .p-details{
+	height:200px;
+	font-weight:bold;
+	font-size:inherit;
+	color:rgba(252,252,252,1.0);
+	background:linear-gradient(170deg, rgba(162,10,84,1.0), rgba(1,52,11,1.0));
+}
+.p-details img:first-child {
+	height:20px;
+	width:20px;
+	float:left;
+	margin:0px 3px;
+}
+.p-details .t-asset{
+	color:rgba(250,250,250,0.7);
+	font-weight:lighter;
+	font-size:14px;
+	margin:6px;
+}
+.p-details .t-asset img:first-child {
+	height:15px;
+	width:15px;
+	margin:0px 5px;
+}
+.p-details .t-asset span img{
+	height:25px;
+	width:25px;
+	display:block;
+	float:right;
+}
+.p-details .t-cash{
+	display:block;
+	float:left;
+	font-weight:lighter;
+	font-size:20px;
+	margin:-3px 15px;
+	letter-spacing:1.5px;
+}
+.p-details .lock{
+	display:block;
+	float:right;
+	font-size:18px;
+	margin:-1px 20px;
+	letter-spacing:1.5px;
+	padding:2px 14px;
+	background:rgba(170,10,60,0.8);
+	border-radius:2px 20px 2px 20px;
+	color:white;
+	box-shadow:inset 0px 1px 5px rgba(225,225,225,0.2);
+}
+.p-details .l-exp{
+	display:block;
+	float:left;
+	color:rgba(250,250,250,0.7);
+	font-weight:lighter;
+	font-size:11px;
+	margin:8px 5px;
+	letter-spacing:1.5px;
+	overflow:hidden;
+}
+.p-details .lock img{
+	display:block;
+	float:right;
+	width:20px;
+	height:20px;
+}
+.p-details .locked{
+	float:left;
+	display:flex;
+	height:100px;
+	width:100%;
+	margin:1px 0px;
+	background:rgba(170,112,60,0.1);
+	border-radius:2px 20px 2px 20px;
+	color:white;
+	overflow:hidden;
+	box-shadow:inset 0px 1px 5px rgba(225,225,225,0.2);
+}
+.p-details .locked .active, .inactive{
+	height:85px;
+	width:100%;
+	min-width:120px;
+	font-size:18px;
+	margin:5px 6px;
+	background:linear-gradient(to bottom, rgba(162,10,84,0.6) 50%, rgba(1,52,11,0.6));
+	padding:2px 4px;
+	border-radius:10px;
+	color:white;
+	box-shadow:inset 0px 0px 5px rgba(225,225,225,0.8);
+}
+.locked .active.inactive div{
+	color:rgba(255,255,255,0.5);
+}
+.locked .active .lt{
+	color:white;
+	font-weight:bold;
+	font-size:13px;
+	margin:6px;
+	letter-spacing:1px;
+}
+.locked .active .l-cash{
+	color:white;
+	font-weight:bold;
+	font-size:16px;
+	width:100%;
+	text-align:center;
+	letter-spacing:1px;
+}
+.locked .active hr{
+	color:white;
+	opacity:0.3;
+	font-weight:lighter;
+	margin:3px 5px;
+	letter-spacing:1px;
+}
+
+.locked .active .odl{
+	color:rgba(250,250,250,0.7);
+	font-weight:bold;
+	font-size:11px;
+	margin:1px 7px;
+}
+.locked .active .o-date{
+	color:rgba(255,255,255,0.9);
+	font-weight:bold;
+	font-size:12px;
+	width:100%;
+	text-align:center;
+	letter-spacing:1px;
+}
+
+.locked .active img{
+	display:block;
+	float:left;
+	width:20px;
+	height:20px;
+	padding:2px;
+	background:linear-gradient(to bottom, rgba(162,10,84,0.6) 80%, rgba(1,52,11,0.6));
+	padding:2px 4px;
+	border-radius:100%;
+	box-shadow:inset 0px 0px 15px rgba(225,225,225,0.8);
+}
+.p-details.loan{
+	height:100px !important;
+	font-size:25px !important;
+}
+.p-details.loan img:first-child {
+	height:30px;
+	width:30px;
+	float:left;
+	margin:0px 3px;
+}
+.p-details.loan .t-asset img:first-child {
+	height:15px;
+	width:15px;
+	margin:0px 5px;
+}
+.p-details.loan .t-asset{
+	color:rgba(20,220,5,0.7);
+	font-weight:bold;
+	font-size:14px;
+	margin:6px;
+}
+.p-details.loan .t-cash{
+	display:block;
+	float:left;
+	font-weight:bold;
+	font-size:20px;
+	margin:-3px 10px;
+	letter-spacing:1px;
+}
+.p-details.loan .lock{
+	display:block;
+	float:right;
+	font-size:18px;
+	margin:-1px 2px;
+	letter-spacing:1px;
+	padding:2px 14px;
+	background:rgba(120,12,190,0.8);
+	border-radius:2px 20px 2px 20px;
+	color:white;
+	box-shadow:inset 0px 1px 5px rgba(225,225,225,0.2);
+}
+.p-details.loan .l-exp{
+	display:block;
+	float:left;
+	color:rgba(250,250,250,0.7);
+	font-weight:lighter;
+	font-size:13px;
+	margin:8px 15px;
+	letter-spacing:1px;
+	overflow:hidden;
+}
+.p-details.loan .lock img{
+	display:block;
+	width:20px;
+	height:20px;
+	float:right;
+}
+.rate .rt{
+	color:rgba(162,10,64,0.9);
+}
+.rate img:first-child {
+	height:20px;
+	width:20px;
+	float:left;
+	margin:0px 3px;
+	opacity:0.8;
+}
+.rate {
+	height:80px;
+}
+.rate .n-rate  {
+	font-size:30px;
+}
+.rate .n-rate span img:first-child {
+	height:45px;
+	width:45px;
+	margin-bottom:-10px;
+	float:none;
+}
+.rate .more{
+	font-size:15px;
+	color:rgba(25,25,25,0.8);
+	float:right;
+	font-weight:bold;
+}
+.transaction {
+	color:rgba(50,50,50,0.8);
+}
+.transaction img{
+	width:20px;
+	height:20px;
+	margin-bottom:-5px;
+}
+.transaction .more{
+	font-size:15px;
+	color:rgba(50,50,50,0.8);
+	float:right;
+	font-weight:bold;
+}
+.msg{
+	margin:15px 5px;
+}
+.msg hr {
+	margin:4px;
+	width:100%;
+}
+.msg.credit{
+	border:1px solid rgba(16,160,14,0.8);
+	box-shadow:inset 0px 0px 25px rgba(25,185,25,0.15);
+}
+.msg.debit{
+	border:1px solid rgba(216,10,14,0.8);
+		box-shadow:inset 0px 0px 25px rgba(185,25,25,0.15);
+}
+.msg.credit hr{
+	border:1px solid rgba(16,160,14,0.8);
+	background:rgba(12,160,84,0.8);
+}
+.msg.debit hr{
+	border:1px solid rgba(216,10,14,0.8);
+	background:rgba(212,10,14,0.8);
+}
+.msg .date{
+	display:block;
+	float:left;
+	color:rgba(25,25,25,0.8);
+}
+.msg.credit .status{
+	display:block;
+	float:right;
+	color:rgba(25,125,25,1.0);
+	font-weight:bolder;
+}
+.msg.debit .status{
+	display:block;
+	float:right;
+	color:rgba(185,12,25,1.0);
+	font-weight:bolder;
+}
+.msg .msg-d {
+	display:block;
+	margin:0px;
+	color:rgba(25,25,25,0.8);
+	font-weight:bolder;
+}
+#nav{
+	height:40px;
+	position:fixed;
+	width:100%;
+	background:rgba(250,250,250,1.0);
+	padding: 0;
+	text-align:center;
+	box-shadow:0px 1px 25px rgba(25,25,25,0.2);
+}
+#nav img{
+	height:20px;
+	width:20px;
+	margin:8px 8px;
+	position:relative;
+}
+#nav a:not(:first-child){
+	float:right;
+	display:block;
+}
+#nav a:nth-child(2){
+	float:left;
+	margin:15px 10px;
+	position:relative;
+	display:block;
+	font-size:17px;
+	text-decoration:none;
+	font-weight:bold;
+	font-variant:small-caps;
+	letter-spacing:1.5px;
+	color:rgba(162,10,84,1.0);
+}
+#nav a:first-child {
+	float:left;
+	text-align:center;
+}
+#nav .logo {
+	height:35px;
+	width:70px;
+	margin:2px -14px;
+}
+#btnav{
+	background:rgba(255,255,255,1.0);
+	position:fixed;
+	bottom:0;
+	border-radius:20px 20px 0 0;
+	padding-bottom:0px;
+	width:100%;
+	text-align:center;
+	box-shadow:0px 1px 25px rgba(25,25,25,0.2);
+}
+#btnav img{
+	height:28px;
+	width:28px;
+	position:relative;
+}
+#btnav div{
+	margin:0px auto;
+	background-color:;
+	width:100%;
+	min-width:260px;
+	height:auto;
+	justify-content:center;
+	display:flex;
+}
+#btnav a{
+	display:block;
+	margin:10px 5.5%;
+	text-align:center;
+	font-size:10px;
+	max-width:50px;
+	text-decoration:none;
+	font-weight:bold;
+	color:rgba(50,20,20,1.0);
+}
+.b-margin{
+	width:;:100%;
+	height:70px;
+}
+</style>
+</head>
+<body>
+<div id="app">
+<nav id="nav" >
+<a href="" ><img src="svglogo1.png" class="logo" ></a>
+<a href="" >Tradebank</a>
+<a href="" ><img src="100(2).png" ></a>
+<a href="" ><img src="100(3).png" ></a>
+<a href="" ><img src="100(4).png" ></a>
+</nav>
+<section id="home" >
+<div class="p-details" ><img src="100(18).png" >Lock Bank
+<div class="t-asset" ><img src="100(19).png" >Total Assets
+<span><img src="100(21).png" ></span></div>
+<div class="t-cash" >N2000.00</div>
+<div class="lock" >Lock<img src="100(18).png" ></div>
+<div class="l-exp" >Lock Funds for emergencies and specific goals</div>
+<div class="locked" >
+<div class="active" >
+	<img src="100(18).png" >
+	<div class="lt" >Locked</div>
+	<div class="l-cash" >N50000.00</div><hr>
+	<div class="odl" >Opening date</div>
+	<div class="o-date" >03-09-2023</div>
+</div>
+<div class="active inactive" >
+	<img src="100(18).png" >
+	<div class="lt" >Locked</div>
+	<div class="l-cash" >N******</div><hr>
+	<div class="odl" >Opening date</div>
+	<div class="o-date" ></div>
+</div>
+<div class="active inactive" >
+	<img src="100(18).png" >
+	<div class="lt" >Locked</div>
+	<div class="l-cash" >N******</div><hr>
+	<div class="odl" >Opening date</div>
+	<div class="o-date" ></div>
+	
+</div>
+</div>
+</div>
+<div class="balance" >Cash N<span>230,684.00</span>
+<span><img src="100(14).png" ></span>
+<span><img src="100(11).png" ></span>
+</div>
+<div class="balance cash" >Wallet N<span>50,180.00</span>
+<span><img src="100(16).png" ></span>
+<span><img src="100(11).png" ></span>
+</div>
+<div class="p-details loan" >
+	<img src="100(15).png" >Loan
+	<div class="t-asset" ><img src="100(23).png" >Credit limit up to</div>
+	<div class="t-cash" >N1,000,000.00</div>
+	<div class="lock" >Get Now<img src="100(25).png" ></div>
+	<div class="l-exp" >Buy now and Pay flexibly from your Profit</div>
+</div>
+<div class="rate" >
+	<img src="100.png" >
+	<div class="rt" >Vimticoin Rate</div>
+	<div class="n-rate" >
+	<span class="cf" >V1.00</span>
+	<span><img src="100(24).png" ></span>
+	<span class="ct" >N10.00</span>
+	</div>
+	<div class="more" >See more..</div>
+</div>
+<div class="transaction" >
+	<div class="trans-t" >Transaction history<img src="100(26).png" >
+	<span class="more" >more</span></div>
+	<div class="msg debit" >
+		<div class="date" >02/08/23</div>
+		<div class="status" >Debit</div>
+		<br><hr><div class="msg-d" >You've spent N1,000.00 on a vimtilena product </div>
+	</div>
+	<div class="msg credit" >
+	<div class="date" >12/04/23</div>
+	<div class="status" >Credit</div>
+	<br><hr><div class="msg-d" >Your Cash balance has been credited N800.00 </div>
+	</div>
+</div>
+<div class="b-margin" ></div>
+</section>
+<nav id="btnav" >
+<div>
+<a href="" ><img src="100(6).png" >Home</a>
+<a href="" ><img src="100(9).png" >Product</a>
+<a href="" ><img src="100(8).png" >Market</a>
+<a href="" ><img src="100(7).png" >Store</a>
+<a href="" ><img src="100(10).png" >Tradebank</a>
+</div>
+</nav>
+</div>
+</body>
+</html>
